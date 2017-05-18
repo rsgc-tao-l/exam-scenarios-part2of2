@@ -405,22 +405,22 @@ open class Canvas : CustomPlaygroundQuickLookable {
     }
     
     // Draw an ellipse on the image
-    open func drawEllipse(centreX: Int, centreY: Int, width: Int, height: Int, borderWidth: Int = 0) {
+    open func drawEllipse(centreX: Float, centreY: Float, width: Float, height: Float, borderWidth: Int = 0) {
         
         // Set attributes of shape based on the canvas scale factor
         var centreX = centreX
-        centreX *= scale
+        centreX *= Float(scale)
         var centreY = centreY
-        centreY *= scale
+        centreY *= Float(scale)
         var width = width
-        width *= scale
+        width *= Float(scale)
         var height = height
-        height *= scale
+        height *= Float(scale)
         var borderWidth = borderWidth
         borderWidth *= scale
         
         // Make the new path
-        let path = NSBezierPath(ovalIn: NSRect(x: centreX - width/2, y: centreY - height/2, width: width, height: height))
+        let path = NSBezierPath(ovalIn: NSRect(x: CGFloat(centreX - width/2), y: CGFloat(centreY - height/2), width: CGFloat(width), height: CGFloat(height)))
         
         // Set width of border
         if borderWidth > 0 {
@@ -444,6 +444,14 @@ open class Canvas : CustomPlaygroundQuickLookable {
         if (self.drawShapesWithFill == true) {
             path.fill()
         }
+        
+    }
+    
+    
+    // Draw an ellipse on the image
+    open func drawEllipse(centreX: Int, centreY: Int, width: Int, height: Int, borderWidth: Int = 0) {
+        
+        self.drawEllipse(centreX: Float(centreX), centreY: Float(centreY), width: Float(width), height: Float(height), borderWidth: borderWidth)
         
     }
     
@@ -512,26 +520,27 @@ open class Canvas : CustomPlaygroundQuickLookable {
         
     }
     
-    open func drawRoundedRectangle(bottomLeftX: Float, bottomLeftY: Float, width: Float, height: Float, borderWidth: Int = 1, xRadius: Float = 10, yRadius : Float = 10) {
+    // Draw a rounded rectangle on the image
+    open func drawRoundedRectangle(bottomLeftX: Int, bottomLeftY: Int, width: Int, height: Int, borderWidth: Int = 1, xRadius: Int = 10, yRadius : Int = 10) {
         
         // Set attributes of shape based on the canvas scale factor
         var bottomLeftX = bottomLeftX
-        bottomLeftX *= Float(scale)
+        bottomLeftX *= scale
         var bottomLeftY = bottomLeftY
-        bottomLeftY *= Float(scale)
+        bottomLeftY *= scale
         var width = width
-        width *= Float(scale)
+        width *= scale
         var height = height
-        height *= Float(scale)
+        height *= scale
         var borderWidth = borderWidth
         borderWidth *= scale
         var xRadius = xRadius
-        xRadius *= Float(scale)
+        xRadius *= scale
         var yRadius = yRadius
-        yRadius *= Float(scale)
+        yRadius *= scale
         
         // Make the new path
-        let path = NSBezierPath(roundedRect: NSRect(x: CGFloat(bottomLeftX), y: CGFloat(bottomLeftY), width: CGFloat(width), height: CGFloat(height)), xRadius: CGFloat(xRadius), yRadius: CGFloat(yRadius))
+        let path = NSBezierPath(roundedRect: NSRect(x: bottomLeftX, y: bottomLeftY, width: width, height: height), xRadius: CGFloat(xRadius), yRadius: CGFloat(yRadius))
         
         // Set width of border
         if borderWidth > 1 * scale {
@@ -555,21 +564,6 @@ open class Canvas : CustomPlaygroundQuickLookable {
         if (self.drawShapesWithFill == true) {
             path.fill()
         }
-        
-    }
-    
-    // Draw a rounded rectangle on the image
-    open func drawRoundedRectangle(bottomLeftX: Int, bottomLeftY: Int, width: Int, height: Int, borderWidth: Int = 1, xRadius: Int = 10, yRadius : Int = 10) {
-        
-        self.drawRoundedRectangle(bottomLeftX: Float(bottomLeftX), bottomLeftY: Float(bottomLeftY), width: Float(width), height: Float(height), borderWidth: borderWidth, xRadius: Float(xRadius), yRadius: Float(yRadius))
-        
-    }
-    
-    // Convenience method to draw a roudned rectangle from it's centre point
-    open func drawRoundedRectangle(centreX: Float, centreY: Float, width: Float, height: Float, borderWidth: Int = 1, xRadius : Float = 10, yRadius : Float = 10) {
-        
-        // Call the original method but with points translated
-        self.drawRoundedRectangle(bottomLeftX: Float(centreX - width / 2), bottomLeftY: Float(centreY - height / 2), width: Float(width), height: Float(height), borderWidth: borderWidth, xRadius: Float(xRadius), yRadius: Float(yRadius))
         
     }
     

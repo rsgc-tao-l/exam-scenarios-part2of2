@@ -1,9 +1,9 @@
-//: [Previous](@previous) / [Next](@next)
-//: # Scenario 4
+//: [Previous](@previous)
+//: # Scenario 5
 //: ## Your goal
 //: Reproduce this image:
 //:
-//: ![Velocity Girl](VelocityGirl.jpg "Velocity Girl")
+//: ![Velocity Girl](VelocityGirl.png "Velocity Girl")
 /*:
  ## Notes:
  * you will work on a canvas that is 400 pixels wide by 600 pixels high
@@ -23,6 +23,14 @@ import PlaygroundSupport
 // Create a new canvas
 let canvas = Canvas(width: 400, height: 600)
 
+// Color constants
+let offWhite = Color(hue: 87, saturation: 6, brightness: 88, alpha: 100)
+let yellow = Color(hue: 37, saturation: 93, brightness: 98, alpha: 100)
+let pink = Color(hue: 326, saturation: 99, brightness: 93, alpha: 100)
+let blue = Color(hue: 240, saturation: 80, brightness: 50, alpha: 50)
+let black = Color(hue: 0, saturation: 0, brightness: 0, alpha: 100)
+
+// Your code below...
 
 //: ## Template code
 //: The code below is necessary to see the result of your work in the Assistant Editor at right. Please do not remove.
