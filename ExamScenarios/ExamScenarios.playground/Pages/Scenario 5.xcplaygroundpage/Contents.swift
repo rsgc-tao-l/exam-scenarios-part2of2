@@ -3,7 +3,7 @@
 //: ## Your goal
 //: Reproduce this image:
 //:
-//: ![Velvet Underground](VelvetUnderground.jpg "Velvet Underground")
+//: ![Velvet Underground](VelvetUnderground.png "Velvet Underground")
 /*:
  ## Notes:
  * you will work on a canvas that is 400 pixels wide by 600 pixels high

@@ -367,17 +367,17 @@ open class Canvas : CustomPlaygroundQuickLookable {
     }
     
     // Draw a line on the image
-    open func drawLine(fromX: Int, fromY: Int, toX: Int, toY: Int, lineWidth: Int = 0, capStyle : NSLineCapStyle = NSLineCapStyle.squareLineCapStyle) {
+    open func drawLine(fromX: Float, fromY: Float, toX: Float, toY: Float, lineWidth: Int = 0, capStyle : NSLineCapStyle = NSLineCapStyle.squareLineCapStyle) {
         
         // Set attributes of shape based on the canvas scale factor
         var fromX = fromX
-        fromX *= scale
+        fromX *= Float(scale)
         var fromY = fromY
-        fromY *= scale
+        fromY *= Float(scale)
         var toX = toX
-        toX *= scale
+        toX *= Float(scale)
         var toY = toY
-        toY *= scale
+        toY *= Float(scale)
         var lineWidth = lineWidth
         lineWidth *= scale
         
@@ -393,8 +393,8 @@ open class Canvas : CustomPlaygroundQuickLookable {
         }
         
         // Define the line
-        path.move(to: NSPoint(x: fromX, y: fromY))
-        path.line(to: NSPoint(x: toX, y: toY))
+        path.move(to: NSPoint(x: CGFloat(fromX), y: CGFloat(fromY)))
+        path.line(to: NSPoint(x: CGFloat(toX), y: CGFloat(toY)))
         
         // Set the line's color
         NSColor(hue: lineColor.translatedHue, saturation: lineColor.translatedSaturation, brightness: lineColor.translatedBrightness, alpha: lineColor.translatedAlpha).setStroke()
@@ -404,23 +404,31 @@ open class Canvas : CustomPlaygroundQuickLookable {
         
     }
     
+    
+    // Draw a line on the image
+    open func drawLine(fromX: Int, fromY: Int, toX: Int, toY: Int, lineWidth: Int = 0, capStyle : NSLineCapStyle = NSLineCapStyle.squareLineCapStyle) {
+        
+        self.drawLine(fromX: Float(fromX), fromY: Float(fromY), toX: Float(toX), toY: Float(toY))
+        
+    }
+    
     // Draw an ellipse on the image
-    open func drawEllipse(centreX: Float, centreY: Float, width: Float, height: Float, borderWidth: Int = 0) {
+    open func drawEllipse(centreX: Int, centreY: Int, width: Int, height: Int, borderWidth: Int = 0) {
         
         // Set attributes of shape based on the canvas scale factor
         var centreX = centreX
-        centreX *= Float(scale)
+        centreX *= scale
         var centreY = centreY
-        centreY *= Float(scale)
+        centreY *= scale
         var width = width
-        width *= Float(scale)
+        width *= scale
         var height = height
-        height *= Float(scale)
+        height *= scale
         var borderWidth = borderWidth
         borderWidth *= scale
         
         // Make the new path
-        let path = NSBezierPath(ovalIn: NSRect(x: CGFloat(centreX - width/2), y: CGFloat(centreY - height/2), width: CGFloat(width), height: CGFloat(height)))
+        let path = NSBezierPath(ovalIn: NSRect(x: centreX - width/2, y: centreY - height/2, width: width, height: height))
         
         // Set width of border
         if borderWidth > 0 {
@@ -444,14 +452,6 @@ open class Canvas : CustomPlaygroundQuickLookable {
         if (self.drawShapesWithFill == true) {
             path.fill()
         }
-        
-    }
-    
-    
-    // Draw an ellipse on the image
-    open func drawEllipse(centreX: Int, centreY: Int, width: Int, height: Int, borderWidth: Int = 0) {
-        
-        self.drawEllipse(centreX: Float(centreX), centreY: Float(centreY), width: Float(width), height: Float(height), borderWidth: borderWidth)
         
     }
     
