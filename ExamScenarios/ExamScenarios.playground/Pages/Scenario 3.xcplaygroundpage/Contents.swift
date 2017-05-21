@@ -22,8 +22,41 @@ import PlaygroundSupport
 //: ## Your code starts here
 // Create a new canvas
 let canvas = Canvas(width: 400, height: 600)
+canvas.drawShapesWithBorders = false
+canvas.drawShapesWithFill = true
+//drawing the big triangles
+for Tricolor in 1...2{
+    var x = 0
+    if Tricolor == 1{
+        canvas.fillColor = Color.yellow
+        x = 0
+    }else{
+        canvas.fillColor = Color.white
+        x = 400
+    }
+    var triangles : [NSPoint] = []
+    triangles.append( NSPoint( x: -1 , y: 200))
+    triangles.append( NSPoint( x: 400-x , y: 200+x))
+    triangles.append( NSPoint( x: 400 , y: 601))
+    canvas.drawCustomShape(with: triangles)
+}
 
+//rectangle on the ground
+canvas.fillColor = Color(hue: 10, saturation: 85, brightness: 97, alpha: 100)
+canvas.drawRectangle(bottomLeftX: 0, bottomLeftY: 0, width: 400, height: 200)
 
-//: ## Template code
-//: The code below is necessary to see the result of your work in the Assistant Editor at right. Please do not remove.
+//small trangles
+canvas.fillColor = Color(hue: 10, saturation: 85, brightness: 97, alpha: 100)
+for xAxis in stride(from: 0, to: 9, by: 1){
+    for yAxis in stride(from: 0, to: 9, by: 1){
+        var side = ((405/9) * xAxis) - 1
+        var up = (405/9) * yAxis
+        var Wvertices : [NSPoint] = []
+        Wvertices.append( NSPoint( x: side , y: 200 + up))
+        Wvertices.append( NSPoint( x: side , y: 200 + up + (405/9)))
+        Wvertices.append( NSPoint( x: side + (405/9) , y: 200 + up + (405/9)))
+        canvas.drawCustomShape(with: Wvertices)
+    }
+}
+
 PlaygroundPage.current.liveView = canvas.imageView
